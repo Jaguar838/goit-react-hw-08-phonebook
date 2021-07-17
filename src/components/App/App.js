@@ -9,6 +9,7 @@ const App = () => {
         {/* <Route path={ROUTE_PATHS._()} exact component={ContactsView} /> */}
         <Route component={NotFoundView} />
       </Switch>
+      <p>Hi!</p>
     </>
   );
 };
