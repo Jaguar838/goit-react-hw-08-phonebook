@@ -1,14 +1,30 @@
 import { Component } from 'react'
-import PropTypes from 'prop-types'
+import { v4 as uuidv4 } from "uuid";
+// import PropTypes from 'prop-types'
 
 export class ContactForm extends Component {
     state = {
         name: "",
         phone: "",
     }
-    handleChangeForm = ({ target }) {
+
+    handleSubmit = (evt) => {
+        evt.preventDefault();
+        const { name, number } = this.state;
+        this.props.onSubmit({ id: uuidv4(), name, number });
+        this.reset();
+      };
+    
+      reset = () => {
+        this.setState({
+          name: "",
+          number: "",
+        });
+      };
+
+    handleChangeForm = ({ target }) => {
         const { name, value } = target
-        this.setState()
+        this.setState({ [name]: value });
     }
     render() {
         const { name, phone } = this.state
@@ -21,3 +37,5 @@ export class ContactForm extends Component {
         )
     }
 }
+
+// ContactForm.PropTypes
