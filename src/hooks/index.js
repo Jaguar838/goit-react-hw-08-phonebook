@@ -1,1 +1,0 @@
-export { useOnGoMainPage } from './useOnGoMainPage';
