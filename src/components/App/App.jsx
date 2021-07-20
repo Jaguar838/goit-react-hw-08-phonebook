@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import {SectionWrap} from 'components/UI/SectionWrap'
+import {SectionWrap} from 'UI/SectionWrap'
 import { ContactForm } from "components/ContactForm";
 import { ContactList } from 'components/ContactList';
 import { Filter } from 'components/Filter';
