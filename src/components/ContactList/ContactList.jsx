@@ -8,7 +8,7 @@ import css from "./ContactList.module.css";
           <span>
             {name}:{phone}
           </span>
-          <button onClick={() => onRemove(id)} className={css.btn}>
+          <button className={css.btn} onClick={() => onRemove(id)} >
             Delete
           </button>
         </li>
@@ -26,7 +26,7 @@ export const ContactList = ({ contacts, onRemove }) => {
 
 ContactList.propTypes = {
   contacts: PropTypes.array.isRequired,
-  onDelete: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired,
 };
 
 export default ContactList;

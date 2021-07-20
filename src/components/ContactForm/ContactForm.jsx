@@ -11,8 +11,6 @@ export class ContactForm extends Component {
 
     handleChangeForm = ({ target }) => {
         const { name, value } = target;
-        console.log(this.state.name);
-        alert('ky')
         this.setState({ [name]: value });
     }
 
@@ -42,7 +40,7 @@ export class ContactForm extends Component {
     render() {
         const { name, phone } = this.state
         return (
-            <form onSabmit={this.handleFormSubmit}>
+            <form onSubmit={this.handleFormSubmit}>
                 <input type="text" name="name" placeholder="Enter name" value={name} onChange={this.handleChangeForm} />
                 <input type="tel" name="phone" placeholder="Enter phone number" value={phone} onChange={this.handleChangeForm} />
                 <button type="submit">Add Contact</button>
