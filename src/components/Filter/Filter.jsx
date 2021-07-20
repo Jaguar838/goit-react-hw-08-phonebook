@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import css from './Filter.module.scss';
 
-const Filter = ({ value, onChange }) => {
+export const Filter = ({ value, onChange }) => {
   return (
     <label className={css.label}>
       <span className={css.labelText}>Find contacts by name</span>

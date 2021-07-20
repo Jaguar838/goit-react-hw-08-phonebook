@@ -1,6 +1,8 @@
 import { Component } from 'react';
+import {SectionWrap} from 'components/UI/SectionWrap'
 import { ContactForm } from "components/ContactForm";
 import { ContactList } from 'components/ContactList';
+import { Filter } from 'components/Filter';
 // import {Filter} from 'components/Filter'
 export default class App extends Component {
   
@@ -32,13 +34,25 @@ export default class App extends Component {
         contacts: contacts.filter(contact => contact.id !== id),
     }));
 
+    handleChangeFilter = (filter) => this.setState({filter})
+    getVisibleContacts =()=> {
+      const {contacts, filter} =this.state
+      return contacts.filter((contact)=> contact.name.toLowerCase().includes(filter.toLowerCase()))
+    }
+
   render() {
-    const { contacts } = this.state;
+    const { filter } = this.state;
+    const visibleContacts = this.getVisibleContacts();
     return (
       <>
-        <h2>Form Contact</h2>
-        <ContactForm onAdd={this.handleAddContact} onCheckUnique={this.handleCheckUniqueContact} />
-        <ContactList contacts={contacts} onRemove={this.handleRemoveContact}/>
+        <SectionWrap title='Form Contact'>
+          <ContactForm onAdd={this.handleAddContact} onCheckUnique={this.handleCheckUniqueContact} />
+        </SectionWrap>
+
+        <SectionWrap title='Contact List'>
+          <Filter filter={filter} onChange={this.handleChangeFilter}/>
+          <ContactList contacts={visibleContacts} onRemove={this.handleRemoveContact}/>
+        </SectionWrap>
       </>
     );
   }
