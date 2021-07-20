@@ -1,6 +1,7 @@
 import { Component } from 'react'
 import { v4 as uuidv4 } from "uuid";
 // import PropTypes from 'prop-types'
+
 const INICIAL_STATE = {
     name: "",
     phone: "",
@@ -9,7 +10,9 @@ export class ContactForm extends Component {
     state = INICIAL_STATE
 
     handleChangeForm = ({ target }) => {
-        const { name, value } = target
+        const { name, value } = target;
+        console.log(this.state.name);
+        alert('ky')
         this.setState({ [name]: value });
     }
 
@@ -26,6 +29,7 @@ export class ContactForm extends Component {
     resetForm = () => {
         this.setState(INICIAL_STATE);
     };
+
     validateForm = () => {
         const { name, phone } = this.state;
         const { onCheckUnique } = this.props;
@@ -40,7 +44,7 @@ export class ContactForm extends Component {
         return (
             <form onSabmit={this.handleFormSubmit}>
                 <input type="text" name="name" placeholder="Enter name" value={name} onChange={this.handleChangeForm} />
-                <input type="tel" name="phone" id="" placeholder="Enter phone number" value={phone} onChange={this.handleChangeForm} />
+                <input type="tel" name="phone" placeholder="Enter phone number" value={phone} onChange={this.handleChangeForm} />
                 <button type="submit">Add Contact</button>
             </form>
         )

@@ -4,7 +4,7 @@ import css from "./ContactList.module.css";
 
  const ContactListItem = ({ id, name, phone, onRemove }) => {
   return (
-<li key={id} className={css.item}>
+<li className={css.item}>
           <span>
             {name}:{phone}
           </span>
@@ -19,7 +19,7 @@ export const ContactList = ({ contacts, onRemove }) => {
   console.log(contacts.length);
   return (
     <ul>
-      {contacts.map((contact) => <ContactListItem {...contact} onRemove={onRemove}/>)}
+      {contacts.map((contact) => <ContactListItem key={contact.id} {...contact} onRemove={onRemove}/>)}
     </ul>
   );
 };
