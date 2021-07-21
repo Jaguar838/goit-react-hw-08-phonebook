@@ -2,6 +2,7 @@
   "name": "phonebook",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://Jaguar838.github.io/goit-react-hw-02-phonebook",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
@@ -20,7 +21,6 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "ndeploy": "netlify deploy -p",
     "prepare": "husky install"
   },
   "eslintConfig": {
