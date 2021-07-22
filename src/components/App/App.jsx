@@ -1,11 +1,11 @@
 import { Component } from 'react';
 import {Layout} from 'UI/Layout'
 import {SectionWrap} from 'UI/SectionWrap'
-import { ContactForm } from "components/ContactForm";
+import { ContactForm } from 'components/ContactForm';
 import { ContactList } from 'components/ContactList';
 import { Filter } from 'components/Filter';
 import testContacts from 'server/contacts.json';
-// console.log(testContacts);
+console.log(testContacts);
 export default class App extends Component {
   
   state = {
