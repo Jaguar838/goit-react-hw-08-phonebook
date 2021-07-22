@@ -5,7 +5,7 @@ import css from "./ContactList.module.css";
 const ContactListItem = ({name, phone, onRemove }) => {
   return (
         <li className={css.item}>
-      <span style={{display: 'inline-block', width: '250px' }} >{name}:{phone}</span>
+      <span className={css.span} >{name}:{phone}</span>
           <button className="btn" onClick={onRemove} >
             Delete
           </button>
