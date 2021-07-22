@@ -6,6 +6,7 @@ import { ContactList } from 'components/ContactList';
 import { Filter } from 'components/Filter';
 import testContacts from 'server/contacts.json';
 console.log(testContacts);
+
 export default class App extends Component {
   
   state = {
