@@ -1,5 +1,5 @@
-import { Component } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React, { Component } from 'react';
+import uuid from 'react-uuid';
 import css from './ContactForm.module.css';
 import PropTypes from 'prop-types';
 
@@ -9,7 +9,7 @@ const INICIAL_STATE = {
 };
 export class ContactForm extends Component {
     static propTypes = {
-        onSubmit: PropTypes.func.isRequired,
+        onAdd: PropTypes.func.isRequired,
     };
     state = INICIAL_STATE;
 
@@ -24,7 +24,7 @@ export class ContactForm extends Component {
         const { onAdd } = this.props;
         const isValidateForm = this.validateForm();
         if (!isValidateForm) return;
-        onAdd({ id: uuidv4(), name, phone });
+        onAdd({ id: uuid(), name, phone });
         this.resetForm();
     };
 

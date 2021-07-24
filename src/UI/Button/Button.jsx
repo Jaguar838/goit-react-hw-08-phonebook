@@ -1,16 +1,17 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Btn } from './Button.style';
 
 const Button = ({ children, onClick }) => (
-  <Btn onClick={onClick}>{children}</Btn>
+    <Btn onClick={onClick}>{children}</Btn>
 );
 
 Button.defaultProps = {
-  children: '',
+    children: '',
 };
 
 Button.propTypes = {
-  children: PropTypes.node.isRequired,
+    children: PropTypes.node.isRequired,
 };
 
 export default Button;
