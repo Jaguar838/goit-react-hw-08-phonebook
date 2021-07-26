@@ -4,27 +4,30 @@ import { SectionWrap } from 'UI/SectionWrap';
 import { ContactForm } from 'components/ContactForm';
 import { ContactList } from 'components/ContactList';
 import { Filter } from 'components/Filter';
-import testContacts from 'server/contacts.json';
+// import testContacts from 'server/contacts.json';
 
 export default class App extends Component {
     state = {
-        contacts: testContacts,
+        contacts: [],
         filter: '',
         name: '',
         phone: '',
     };
-    
-  componentDidMount() {
-    const parsedContacts = JSON.parse(localStorage.getItem('contacts'));
 
-    parsedContacts && this.setState({ contacts: parsedContacts });
-  }
+    componentDidMount() {
+        const parsedContacts = JSON.parse(localStorage.getItem('contacts'));
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.contacts !== prevState.contacts) {
-      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+        parsedContacts && this.setState({ contacts: parsedContacts });
     }
-  }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.contacts !== prevState.contacts) {
+            localStorage.setItem(
+                'contacts',
+                JSON.stringify(this.state.contacts),
+            );
+        }
+    }
 
     handleAddContact = newContact =>
         this.setState(({ contacts }) => ({
