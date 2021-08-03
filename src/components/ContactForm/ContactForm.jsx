@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import uuid from 'react-uuid';
 import css from './ContactForm.module.css';
 import PropTypes from 'prop-types';
@@ -37,18 +38,19 @@ export function ContactForm({ onAdd }) {
         setPhone('');
     };
 
-        function validateForm() {
-    //         const { name, phone } = this.state;
-            const { onCheckUnique } = this.props;
-            if (!name || !phone) {
-                alert('Some field is empty');
-                return false;
-            }
-            return onCheckUnique(name);
-        };
+    function validateForm() {
+        //         const { name, phone } = this.state;
+        const { onCheckUnique } = this.props;
+        if (!name || !phone) {
+            alert('Some field is empty');
+            return false;
+        }
+        return onCheckUnique(name);
+    }
 
     return (
         <form onSubmit={handleFormSubmit}>
+            <label htmlFor="username">User Name</label>
             <input
                 className={css.input}
                 type="text"
@@ -58,7 +60,9 @@ export function ContactForm({ onAdd }) {
                 title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
                 value={name}
                 onChange={handleChangeForm}
+                // {...register("username")}
             />
+
             <input
                 className={css.input}
                 type="tel"
