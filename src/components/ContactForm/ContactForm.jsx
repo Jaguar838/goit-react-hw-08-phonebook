@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import uuid from 'react-uuid';
 import css from './ContactForm.module.css';
 import PropTypes from 'prop-types';
@@ -7,18 +7,18 @@ const INICIAL_STATE = {
     name: '',
     phone: '',
 };
-export class ContactForm extends Component {
+export function ContactForm () {
     static propTypes = {
         onAdd: PropTypes.func.isRequired,
     };
     state = INICIAL_STATE;
 
-    handleChangeForm = ({ target }) => {
+    function handleChangeForm ({ target })  {
         const { name, value } = target;
         this.setState({ [name]: value });
     };
 
-    handleFormSubmit = evt => {
+    function handleFormSubmit(evt) {
         evt.preventDefault();
         const { name, phone } = this.state;
         const { onAdd } = this.props;
@@ -28,11 +28,11 @@ export class ContactForm extends Component {
         this.resetForm();
     };
 
-    resetForm = () => {
+    function resetForm = () => {
         this.setState(INICIAL_STATE);
     };
 
-    validateForm = () => {
+    function validateForm() {
         const { name, phone } = this.state;
         const { onCheckUnique } = this.props;
         if (!name || !phone) {
