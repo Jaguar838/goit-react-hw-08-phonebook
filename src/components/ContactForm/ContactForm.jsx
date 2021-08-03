@@ -14,7 +14,7 @@ export function ContactForm({ onAdd }) {
             case 'name':
                 setName(value);
                 break;
-            case 'number':
+            case 'phone':
                 setPhone(value);
                 break;
             default:
