@@ -14,20 +14,20 @@ export default class App extends Component {
         phone: '',
     };
 
-    componentDidMount() {
-        const parsedContacts = JSON.parse(localStorage.getItem('contacts'));
+    // componentDidMount() {
+    //     const parsedContacts = JSON.parse(localStorage.getItem('contacts'));
 
-        parsedContacts && this.setState({ contacts: parsedContacts });
-    }
+    //     parsedContacts && this.setState({ contacts: parsedContacts });
+    // }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (this.state.contacts !== prevState.contacts) {
-            localStorage.setItem(
-                'contacts',
-                JSON.stringify(this.state.contacts),
-            );
-        }
-    }
+    // componentDidUpdate(prevProps, prevState) {
+    //     if (this.state.contacts !== prevState.contacts) {
+    //         localStorage.setItem(
+    //             'contacts',
+    //             JSON.stringify(this.state.contacts),
+    //         );
+    //     }
+    // }
 
     handleAddContact = newContact =>
         this.setState(({ contacts }) => ({

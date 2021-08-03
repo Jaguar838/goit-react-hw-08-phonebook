@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'UI/Button';
 
 import css from './ContactList.module.css';
 
@@ -9,9 +10,9 @@ const ContactListItem = ({ name, phone, onRemove }) => {
             <span className={css.span}>
                 {name}:{phone}
             </span>
-            <button className="btn" onClick={onRemove}>
+            <Button className="btn" onClick={onRemove}>
                 Delete
-            </button>
+            </Button>
         </li>
     );
 };

@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
+// import React from 'react';
+
 import { useForm } from 'react-hook-form';
-import uuid from 'react-uuid';
+import { useUIDSeed } from 'react-uid';
+import { Button } from 'UI/Button';
 import css from './ContactForm.module.css';
 import PropTypes from 'prop-types';
 
-export function ContactForm({ onAdd }) {
+export function ContactForm({ onAdd, onCheckUnique }) {
+    const uid = useUIDSeed();
     const {
         register,
+        handleSubmit,
         formState: { errors },
     } = useForm();
 
@@ -28,86 +33,92 @@ export function ContactForm({ onAdd }) {
         }
     };
 
-    const handleFormSubmit = evt => {
-        evt.preventDefault();
-        //         const { name, phone } = this.state;
-        //         const { onAdd } = this.props;
-        // const isValidateForm = validateForm();
-        // if (!isValidateForm) return;
-        onAdd({ id: uuid(), name, phone });
-        resetForm();
-    };
+    // const handleFormSubmit = evt => {
+    //     evt.preventDefault();
+    //     //         const { name, phone } = this.state;
+    //     //         const { onAdd } = this.props;
+    //     // const isValidateForm = validateForm();
+    //     // if (!isValidateForm) return;
+    //     onAdd({ id: { uid }, name, phone });
+    //     resetForm();
+    // };
 
     const resetForm = () => {
         setName('');
         setPhone('');
     };
 
-    // function validateForm() {
-    //     //         const { name, phone } = this.state;
-    //     const { onCheckUnique } = this.props;
-    //     if (!name || !phone) {
-    //         alert('Some field is empty');
-    //         return false;
-    //     }
-    //     return onCheckUnique(name);
-    // }
-
+    function validateForm() {
+        if (!name || !phone) {
+            alert('Some field is empty');
+            return false;
+        }
+        return onCheckUnique(name);
+    }
+    const onSubmit = data => {
+        const isValidateForm = validateForm();
+        if (!isValidateForm) return;
+        onAdd({ id: uid(data), name, phone });
+        resetForm();
+        console.log('Submit', data, errors);
+    };
     return (
-        <form onSubmit={handleFormSubmit}>
-            {/* <input
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <input
                 className={css.input}
                 type="text"
-                name="name"
+                // name="name"
                 placeholder="Enter name"
-                pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-                title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+                {...register('name', { required: true })}
                 value={name}
                 onChange={handleChangeForm}
-                // {...register("username")}
             />
+            {errors.name && <p>Name is required.</p>}
 
             <input
                 className={css.input}
                 type="tel"
-                name="phone"
+                // name="phone"
                 placeholder="Enter phone number"
-                pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-                title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
-                value={phone}
-                onChange={handleChangeForm}
-            /> */}
-
-            <input
-                className={css.input}
-                type="text"
-                name="name"
-                placeholder="Enter name"
-                {...register('Name', { required: true })}
-                value={name}
-                onChange={handleChangeForm}
-            />
-            {errors.Name && <p>Name is required.</p>}
-
-            <input
-                className={css.input}
-                type="tel"
-                name="phone"
-                placeholder="Enter phone number"
-                {...register('tel', { pattern: /^\+?\380(\d{7})$/ })}
+                {...register('phone', {
+                    pattern:
+                        /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
+                })}
                 value={phone}
                 onChange={handleChangeForm}
             />
-            {errors.tel && <p>Please enter number for phone.</p>}
+            {errors.phone && <p>Please enter number for phone.</p>}
 
-            <button className="btn" type="submit">
-                Add Contact
-            </button>
+            <Button type="submit">Add Contact</Button>
         </form>
     );
 }
 
 ContactForm.propTypes = {
     onAdd: PropTypes.func.isRequired,
-    //     onCheckUnique: PropTypes.func.isRequired,
+    onCheckUnique: PropTypes.func.isRequired,
 };
+// {
+//     /* <input
+//     className={css.input}
+//     type="text"
+//     name="name"
+//     placeholder="Enter name"
+//     pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+//     title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+//     value={name}
+//     onChange={handleChangeForm}
+//     // {...register("username")}
+// />
+
+// <input
+//     className={css.input}
+//     type="tel"
+//     name="phone"
+//     placeholder="Enter phone number"
+//     pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+//     title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
+//     value={phone}
+//     onChange={handleChangeForm}
+// /> */
+// }
