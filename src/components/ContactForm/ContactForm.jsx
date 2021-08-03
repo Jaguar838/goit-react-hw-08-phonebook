@@ -5,6 +5,11 @@ import css from './ContactForm.module.css';
 import PropTypes from 'prop-types';
 
 export function ContactForm({ onAdd }) {
+    const {
+        register,
+        formState: { errors },
+    } = useForm();
+
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
 
@@ -27,8 +32,8 @@ export function ContactForm({ onAdd }) {
         evt.preventDefault();
         //         const { name, phone } = this.state;
         //         const { onAdd } = this.props;
-        const isValidateForm = validateForm();
-        if (!isValidateForm) return;
+        // const isValidateForm = validateForm();
+        // if (!isValidateForm) return;
         onAdd({ id: uuid(), name, phone });
         resetForm();
     };
@@ -38,20 +43,19 @@ export function ContactForm({ onAdd }) {
         setPhone('');
     };
 
-    function validateForm() {
-        //         const { name, phone } = this.state;
-        const { onCheckUnique } = this.props;
-        if (!name || !phone) {
-            alert('Some field is empty');
-            return false;
-        }
-        return onCheckUnique(name);
-    }
+    // function validateForm() {
+    //     //         const { name, phone } = this.state;
+    //     const { onCheckUnique } = this.props;
+    //     if (!name || !phone) {
+    //         alert('Some field is empty');
+    //         return false;
+    //     }
+    //     return onCheckUnique(name);
+    // }
 
     return (
         <form onSubmit={handleFormSubmit}>
-            <label htmlFor="username">User Name</label>
-            <input
+            {/* <input
                 className={css.input}
                 type="text"
                 name="name"
@@ -72,7 +76,30 @@ export function ContactForm({ onAdd }) {
                 title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
                 value={phone}
                 onChange={handleChangeForm}
+            /> */}
+
+            <input
+                className={css.input}
+                type="text"
+                name="name"
+                placeholder="Enter name"
+                {...register('Name', { required: true })}
+                value={name}
+                onChange={handleChangeForm}
             />
+            {errors.Name && <p>Name is required.</p>}
+
+            <input
+                className={css.input}
+                type="tel"
+                name="phone"
+                placeholder="Enter phone number"
+                {...register('tel', { pattern: /^\+?\380(\d{7})$/ })}
+                value={phone}
+                onChange={handleChangeForm}
+            />
+            {errors.tel && <p>Please enter number for phone.</p>}
+
             <button className="btn" type="submit">
                 Add Contact
             </button>
