@@ -7,7 +7,7 @@ export function ContactForm({ onAdd }) {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
 
-    function handleChangeForm({ target }) {
+    const handleChangeForm = ({ target }) => {
         const { name, value } = target;
 
         switch (name) {
@@ -20,17 +20,17 @@ export function ContactForm({ onAdd }) {
             default:
                 return;
         }
-    }
+    };
 
-    function handleFormSubmit(evt) {
-        // evt.preventDefault();
+    const handleFormSubmit = evt => {
+        evt.preventDefault();
         //         const { name, phone } = this.state;
         //         const { onAdd } = this.props;
         //         const isValidateForm = this.validateForm();
         //         if (!isValidateForm) return;
         onAdd({ id: uuid(), name, phone });
         resetForm();
-    }
+    };
 
     const resetForm = () => {
         setName('');
@@ -48,7 +48,7 @@ export function ContactForm({ onAdd }) {
     //     };
 
     return (
-        <form onSubmit={handleFormSubmit()}>
+        <form onSubmit={handleFormSubmit}>
             <input
                 className={css.input}
                 type="text"
@@ -57,7 +57,7 @@ export function ContactForm({ onAdd }) {
                 pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
                 title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
                 value={name}
-                onChange={handleChangeForm()}
+                onChange={handleChangeForm}
             />
             <input
                 className={css.input}
@@ -67,7 +67,7 @@ export function ContactForm({ onAdd }) {
                 pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                 title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
                 value={phone}
-                onChange={handleChangeForm()}
+                onChange={handleChangeForm}
             />
             <button className="btn" type="submit">
                 Add Contact
