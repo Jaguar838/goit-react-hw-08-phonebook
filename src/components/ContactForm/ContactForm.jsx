@@ -26,8 +26,8 @@ export function ContactForm({ onAdd }) {
         evt.preventDefault();
         //         const { name, phone } = this.state;
         //         const { onAdd } = this.props;
-        //         const isValidateForm = this.validateForm();
-        //         if (!isValidateForm) return;
+        const isValidateForm = validateForm();
+        if (!isValidateForm) return;
         onAdd({ id: uuid(), name, phone });
         resetForm();
     };
@@ -37,15 +37,15 @@ export function ContactForm({ onAdd }) {
         setPhone('');
     };
 
-    //     function validateForm() {
+        function validateForm() {
     //         const { name, phone } = this.state;
-    //         const { onCheckUnique } = this.props;
-    //         if (!name || !phone) {
-    //             alert('Some field is empty');
-    //             return false;
-    //         }
-    //         return onCheckUnique(name);
-    //     };
+            const { onCheckUnique } = this.props;
+            if (!name || !phone) {
+                alert('Some field is empty');
+                return false;
+            }
+            return onCheckUnique(name);
+        };
 
     return (
         <form onSubmit={handleFormSubmit}>
