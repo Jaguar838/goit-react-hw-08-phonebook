@@ -12,7 +12,8 @@ export default function App() {
     const [filter, setFilter] = useState('');
 
     const handleAddContact = newContact => {
-        setContacts(prevState => [...prevState, newContact]);
+        setContacts([newContact, ...contacts]);
+        // setContacts(prevState => [...prevState, newContact]);
     };
 
     const handleCheckUniqueContact = name => {
