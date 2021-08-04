@@ -73,6 +73,7 @@ export function ContactForm({ onAdd, onCheckUnique }) {
                         /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
                 })}
                 value={name}
+                required
                 onChange={handleChangeForm}
             />
             {errors.name && alert('Name is required.')}
@@ -88,6 +89,7 @@ export function ContactForm({ onAdd, onCheckUnique }) {
                         /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
                 })}
                 value={phone}
+                required
                 onChange={handleChangeForm}
             />
             {errors.phone && alert('Please enter number for phone.')}
