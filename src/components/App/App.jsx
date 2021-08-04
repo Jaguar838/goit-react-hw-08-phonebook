@@ -5,9 +5,10 @@ import { ContactForm } from 'components/ContactForm';
 import { ContactList } from 'components/ContactList';
 import { Filter } from 'components/Filter';
 import useLocalStorage from 'hooks/useLocalStorage';
+import testContacts from 'server/contacts.json';
 
 export default function App() {
-    const [contacts, setContacts] = useLocalStorage('contacts', []);
+    const [contacts, setContacts] = useLocalStorage('contacts', [...testContacts]);
     const [filter, setFilter] = useState('');
 
     const handleAddContact = newContact => {
