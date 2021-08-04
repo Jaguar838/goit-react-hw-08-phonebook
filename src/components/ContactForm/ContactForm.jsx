@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-// import React from 'react';
-
 import { useForm } from 'react-hook-form';
 import { useUIDSeed } from 'react-uid';
 import { Button } from 'UI/Button';
@@ -67,18 +65,22 @@ export function ContactForm({ onAdd, onCheckUnique }) {
             <input
                 className={css.input}
                 type="text"
-                // name="name"
+                name="name"
                 placeholder="Enter name"
-                {...register('name', { required: true })}
+                {...register('name', {
+                    required: true,
+                    pattern:
+                        /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
+                })}
                 value={name}
                 onChange={handleChangeForm}
             />
-            {errors.name && <p>Name is required.</p>}
+            {errors.name && alert('Name is required.')}
 
             <input
                 className={css.input}
                 type="tel"
-                // name="phone"
+                name="phone"
                 placeholder="Enter phone number"
                 {...register('phone', {
                     required: true,
@@ -88,7 +90,7 @@ export function ContactForm({ onAdd, onCheckUnique }) {
                 value={phone}
                 onChange={handleChangeForm}
             />
-            {errors.phone && <p>Please enter number for phone.</p>}
+            {errors.phone && alert('Please enter number for phone.')}
 
             <Button type="submit">Add Contact</Button>
         </form>

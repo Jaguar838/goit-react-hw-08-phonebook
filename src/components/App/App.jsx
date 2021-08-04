@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Layout } from 'UI/Layout';
 import { SectionWrap } from 'UI/SectionWrap';
 import { ContactForm } from 'components/ContactForm';
@@ -6,35 +6,20 @@ import { ContactList } from 'components/ContactList';
 import { Filter } from 'components/Filter';
 // import testContacts from 'server/contacts.json';
 
-export default class App extends Component {
-    state = {
-        contacts: [],
-        filter: '',
-        name: '',
-        phone: '',
-    };
+export default function App() {
+    const [contacts, setContacts] = useState(() =>
+        JSON.parse(localStorage.getItem('contacts')),
+    );
+    const [filter, setFilter] = useState('');
 
-    // componentDidMount() {
-    //     const parsedContacts = JSON.parse(localStorage.getItem('contacts'));
+    useEffect(() => {
+        localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }, [contacts]);
 
-    //     parsedContacts && this.setState({ contacts: parsedContacts });
-    // }
+    const handleAddContact = newContact =>
+        setContacts([...contacts, newContact]);
 
-    // componentDidUpdate(prevProps, prevState) {
-    //     if (this.state.contacts !== prevState.contacts) {
-    //         localStorage.setItem(
-    //             'contacts',
-    //             JSON.stringify(this.state.contacts),
-    //         );
-    //     }
-    // }
-
-    handleAddContact = newContact =>
-        this.setState(({ contacts }) => ({
-            contacts: [...contacts, newContact],
-        }));
-
-    handleCheckUniqueContact = name => {
+    const handleCheckUniqueContact = name => {
         const { contacts } = this.state;
         const isExistContact = !!contacts.find(
             contact => contact.name === name,
@@ -43,42 +28,33 @@ export default class App extends Component {
         return !isExistContact;
     };
 
-    handleRemoveContact = id =>
-        this.setState(({ contacts }) => ({
-            contacts: contacts.filter(contact => contact.id !== id),
-        }));
+    const handleRemoveContact = id =>
+        setContacts(contacts.filter(contact => contact.id !== id));
 
-    handleChangeFilter = filter => this.setState({ filter });
-    getVisibleContacts = () => {
-        const { contacts, filter } = this.state;
+    const handleChangeFilter = filter => setFilter({ filter });
+
+    const getVisibleContacts = () => {
         return contacts.filter(contact =>
             contact.name.toLowerCase().includes(filter.toLowerCase()),
         );
     };
 
-    render() {
-        const { filter } = this.state;
-        const visibleContacts = this.getVisibleContacts();
-        return (
-            <Layout>
-                <SectionWrap title="Phonebook">
-                    <ContactForm
-                        onAdd={this.handleAddContact}
-                        onCheckUnique={this.handleCheckUniqueContact}
-                    />
-                </SectionWrap>
+    return (
+        <Layout>
+            <SectionWrap title="Phonebook">
+                <ContactForm
+                    onAdd={handleAddContact}
+                    onCheckUnique={handleCheckUniqueContact}
+                />
+            </SectionWrap>
 
-                <SectionWrap title="Contact List">
-                    <Filter
-                        filter={filter}
-                        onChange={this.handleChangeFilter}
-                    />
-                    <ContactList
-                        contacts={visibleContacts}
-                        onRemove={this.handleRemoveContact}
-                    />
-                </SectionWrap>
-            </Layout>
-        );
-    }
+            <SectionWrap title="Contact List">
+                <Filter filter={filter} onChange={handleChangeFilter} />
+                <ContactList
+                    contacts={getVisibleContacts}
+                    onRemove={handleRemoveContact}
+                />
+            </SectionWrap>
+        </Layout>
+    );
 }
