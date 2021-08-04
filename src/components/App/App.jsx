@@ -8,7 +8,7 @@ import useLocalStorage from 'hooks/useLocalStorage';
 import testContacts from 'server/contacts.json';
 
 export default function App() {
-    const [contacts, setContacts] = useLocalStorage('contacts', [...testContacts]);
+    const [contacts, setContacts] = useLocalStorage('contacts', testContacts);
     const [filter, setFilter] = useState('');
 
     const handleAddContact = newContact => {
@@ -20,6 +20,7 @@ export default function App() {
             contact => contact.name === name,
         );
         isExistContact && alert('Contact is already exist');
+
         return !isExistContact;
     };
 

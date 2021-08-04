@@ -31,11 +31,6 @@ export function ContactForm({ onAdd, onCheckUnique }) {
         }
     };
 
-    const resetForm = () => {
-        setName('');
-        setPhone('');
-    };
-
     function validateForm() {
         if (!name || !phone) {
             alert('Some field is empty');
@@ -50,6 +45,12 @@ export function ContactForm({ onAdd, onCheckUnique }) {
         resetForm();
         console.log('Submit', data, errors);
     };
+
+    const resetForm = () => {
+        setName('');
+        setPhone('');
+    };
+
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <input
