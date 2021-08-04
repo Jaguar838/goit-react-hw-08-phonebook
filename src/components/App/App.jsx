@@ -4,19 +4,19 @@ import { SectionWrap } from 'UI/SectionWrap';
 import { ContactForm } from 'components/ContactForm';
 import { ContactList } from 'components/ContactList';
 import { Filter } from 'components/Filter';
-import { useUIDSeed } from 'react-uid';
+// import { useUIDSeed } from 'react-uid';
 import useLocalStorage from 'hooks/useLocalStorage';
 
 // import testContacts from 'server/contacts.json';
 
 export default function App() {
-    const uid = useUIDSeed();
+//     const uid = useUIDSeed();
     const [contacts, setContacts] = useLocalStorage('contacts', []);
     const [filter, setFilter] = useState('');
 
     const handleAddContact = data => {
        const addContact = {
-      id: uid(data),
+      id: data.id,
       name: data.name,
       phone: data.phone,
     };
