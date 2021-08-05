@@ -1,36 +1,33 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import uuid from 'react-uuid';
+import { useUIDSeed } from 'react-uid';
 import { Button } from 'UI/Button';
 import css from './ContactForm.module.css';
 import PropTypes from 'prop-types';
 
+const INICIAL_STATE = {
+    name: '',
+    phone: '',
+};
+
 export function ContactForm({ onAdd, onCheckUnique }) {
+    const uid = useUIDSeed();
+
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
 
-    const [name, setName] = useState('');
-    const [phone, setPhone] = useState('');
+    const [value, setValue] = useState(INICIAL_STATE);
 
     const handleChangeForm = ({ target }) => {
         const { name, value } = target;
-
-        switch (name) {
-            case 'name':
-                setName(value);
-                break;
-            case 'phone':
-                setPhone(value);
-                break;
-            default:
-                return;
-        }
+        setValue({ [name]: value });
     };
 
     function validateForm() {
+        const { name, phone } = value;
         if (!name || !phone) {
             alert('Some field is empty');
             return false;
@@ -38,17 +35,18 @@ export function ContactForm({ onAdd, onCheckUnique }) {
         return onCheckUnique(name);
     }
     const onSubmit = data => {
-        // const { name, phone } = data;
+        const { name, phone } = value;
         const isValidateForm = validateForm();
+
         if (!isValidateForm) return;
-        onAdd({ id: uuid(), name, phone });
+
+        onAdd({ id: uid(data), name, phone });
         resetForm();
         console.log('Submit', data, errors);
     };
 
     const resetForm = () => {
-        setName('');
-        setPhone('');
+        setValue(INICIAL_STATE);
     };
 
     return (
@@ -56,14 +54,13 @@ export function ContactForm({ onAdd, onCheckUnique }) {
             <input
                 className={css.input}
                 type="text"
-                // name="name"
                 placeholder="Enter name"
                 {...register('name', {
                     required: true,
                     pattern:
                         /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
                 })}
-                value={name}
+                value={value.name}
                 required
                 onChange={handleChangeForm}
             />
@@ -72,14 +69,13 @@ export function ContactForm({ onAdd, onCheckUnique }) {
             <input
                 className={css.input}
                 type="tel"
-                // name="phone"
                 placeholder="Enter phone number"
                 {...register('phone', {
                     required: true,
                     pattern:
                         /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
                 })}
-                value={phone}
+                value={value.phone}
                 required
                 onChange={handleChangeForm}
             />
