@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import uuid from 'react-uuid';
 import { Button } from 'UI/Button';
 import css from './ContactForm.module.css';
 import PropTypes from 'prop-types';
