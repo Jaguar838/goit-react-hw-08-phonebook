@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 axios.defaults.baseURL = 'http://localhost:7777';
-axios.defaults.baseURL = 'http://localhost:7777';
+// axios.defaults.baseURL = 'http://localhost:7777';
 
 export function getContacts() {
     return axios.get('/contacts');
