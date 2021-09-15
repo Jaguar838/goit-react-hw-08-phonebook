@@ -76,13 +76,14 @@ export default function LoginPage() {
 
                 <label className={css.label}>
                     <span className={css.label_text}>Password</span>
-                    <Input
+                    <input
                         type="password"
                         name="password"
                         value={password}
                         onChange={handleChange}
                         placeholder="Enter password"
                         data-pass
+                        className={css.input}
                     />
                 </label>
 

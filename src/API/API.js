@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:7777';
+axios.defaults.baseURL = process.env.REACT_APP_DB_HOST;
 // axios.defaults.baseURL = 'http://localhost:7777';
 
 export function getContacts() {
@@ -14,4 +14,8 @@ export function addContact(contact) {
 
 export function deleteContact(id) {
     return axios.delete(`/contacts/${id}`);
+}
+
+export function editContact(id) {
+    return axios.patch(`/contacts/${id}`);
 }
