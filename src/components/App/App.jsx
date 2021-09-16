@@ -5,7 +5,6 @@ import { Switch, Route } from 'react-router-dom';
 import PrivateRoute from 'routes/PrivateRoute';
 import PublicRoute from 'routes/PublicRoute';
 import AppBar from 'components/AppBar';
-// import BackTopScroll from 'components/BackTopScroll';
 import { Layout, LoaderUI } from 'UI';
 import { Toaster } from 'react-hot-toast';
 
@@ -41,7 +40,6 @@ function App() {
                 <AppBar />
 
                 <Layout>
-                    {/* <BackTopScroll /> */}
                     <Suspense fallback={<LoaderUI />}>
                         <Switch>
                             <PublicRoute path="/" exact>
