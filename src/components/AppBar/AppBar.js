@@ -4,14 +4,14 @@ import Navigation from '../Navigation';
 import AuthNav from '../AuthNav';
 import UserMenu from '../UserMenu';
 
-import styles from './AppBar.module.scss';
+import css from './AppBar.module.scss';
 
 export default function AppBar() {
   const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
 
   return (
-    <header className={styles.Header}>
-      <div className={styles.AppBar}>
+    <header className={css.header}>
+      <div className={css.app_bar}>
         <Navigation />
 
         {isLoggedIn ? <UserMenu /> : <AuthNav />}
