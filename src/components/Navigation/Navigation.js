@@ -8,7 +8,6 @@ const Navigation = () => {
   const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
 
   return (
-    // <div className={styles.ContainerNav}>
     <nav className={css.Navigation}>
       <ul className={css.NavList}>
         <li className={css.NavListItem}>
@@ -35,7 +34,6 @@ const Navigation = () => {
         )}
       </ul>
     </nav>
-    // </div>
   );
 };
 
