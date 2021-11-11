@@ -1,8 +1,11 @@
 import axios from 'axios';
 
 axios.defaults.baseURL = process.env.REACT_APP_DB_HOST;
-// axios.defaults.baseURL = 'http://localhost:7777';
-
+console.log(
+    '🚀 ~ file: API.js ~ line 4 ~ process.env.REACT_APP_DB_HOST',
+    process.env.REACT_APP_DB_HOST,
+);
+axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 export function getContacts() {
     return axios.get('/contacts');
 }
